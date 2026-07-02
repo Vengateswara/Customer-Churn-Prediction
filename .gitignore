@@ -1,0 +1,85 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+pythonenv*
+
+# Data
+data/raw/
+data/processed/
+data/external/
+*.csv
+*.xlsx
+*.db
+*.sqlite
+*.sqlite3
+
+# Models
+*.pkl
+*.joblib
+*.h5
+*.pb
+*.pt
+*.onnx
+saved_models/
+models/
+
+# Logs
+logs/
+*.log
+*.out
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# MLflow
+artifacts/
+mlflow.db
+mlruns/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Deployment
+*.pyc
+*.pyo
+*.pid
+nohup.out
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Reports
+reports/
+figures/
+*.html
+*.pdf
+
+# Distribution
+dist/
+build/
+*.egg-info/
+
+# OS
+Thumbs.db
+.directory

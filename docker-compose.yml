@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  churn-api:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      - API_HOST=0.0.0.0
+      - API_PORT=5000
+      - API_DEBUG=False
+    volumes:
+      - ./logs:/app/logs
+      - ./saved_models:/app/saved_models
+      - ./artifacts:/app/artifacts
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.5.0
+    ports:
+      - "5001:5000"
+    environment:
+      - MLFLOW_TRACKING_URI=sqlite:///mlflow.db
+    volumes:
+      - ./artifacts/mlflow:/mlflow/artifacts
+      - ./mlflow.db:/mlflow/mlflow.db
+    restart: unless-stopped

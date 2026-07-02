@@ -1,0 +1,118 @@
+# Project Configuration
+project:
+  name: "Customer Churn Prediction"
+  version: "1.0.0"
+  environment: "development"
+
+# Data Configuration
+data:
+  raw_path: "data/raw/telco_churn.csv"
+  processed_path: "data/processed/processed_churn.csv"
+  external_path: "data/external/"
+  target_column: "Churn"
+  test_size: 0.2
+  random_state: 42
+  stratify: true
+
+# Feature Engineering
+features:
+  categorical:
+    - "gender"
+    - "Partner"
+    - "Dependents"
+    - "PhoneService"
+    - "MultipleLines"
+    - "InternetService"
+    - "OnlineSecurity"
+    - "OnlineBackup"
+    - "DeviceProtection"
+    - "TechSupport"
+    - "StreamingTV"
+    - "StreamingMovies"
+    - "Contract"
+    - "PaperlessBilling"
+    - "PaymentMethod"
+    - "Churn"
+  numerical:
+    - "tenure"
+    - "MonthlyCharges"
+    - "TotalCharges"
+  engineered_features:
+    - "avg_monthly_spend"
+    - "clv_estimate"
+    - "tenure_group"
+    - "payment_risk_score"
+    - "contract_risk_level"
+    - "service_diversity_index"
+    - "engagement_score"
+    - "loyalty_score"
+
+# Model Configuration
+models:
+  - name: "LogisticRegression"
+    enabled: true
+  - name: "DecisionTree"
+    enabled: true
+  - name: "RandomForest"
+    enabled: true
+  - name: "XGBoost"
+    enabled: true
+  - name: "LightGBM"
+    enabled: true
+  - name: "CatBoost"
+    enabled: true
+  - name: "GradientBoosting"
+    enabled: false
+  - name: "SVM"
+    enabled: false
+  - name: "KNN"
+    enabled: false
+  - name: "NaiveBayes"
+    enabled: false
+
+# Hyperparameter Tuning
+tuning:
+  method: "optuna"  # grid, random, optuna
+  n_trials: 100
+  cv_folds: 5
+  scoring: "roc_auc"
+
+# Preprocessing
+preprocessing:
+  scaling: "standard"  # standard, minmax, robust
+  encoding: "onehot"  # onehot, label, target
+  handle_missing: "median"  # median, mean, mode, drop
+  outlier_method: "iqr"  # iqr, zscore
+  handle_imbalance: "smote"  # smote, class_weight, none
+
+# Evaluation
+evaluation:
+  metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "f1"
+    - "roc_auc"
+    - "pr_auc"
+  cv_folds: 5
+  threshold_tuning: true
+
+# Deployment
+deployment:
+  model_path: "saved_models/best_model.pkl"
+  scaler_path: "saved_models/scaler.pkl"
+  encoder_path: "saved_models/encoder.pkl"
+  api_host: "0.0.0.0"
+  api_port: 5000
+  debug: false
+
+# Logging
+logging:
+  level: "INFO"
+  file: "logs/app.log"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+# MLflow
+mlflow:
+  tracking_uri: "artifacts/mlflow"
+  experiment_name: "churn_prediction"
